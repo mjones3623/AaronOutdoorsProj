@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using AaronOutdoors.ActionFilters;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using AaronOutdoors.Services;
 
 namespace AaronOutdoors
 {
@@ -44,6 +46,13 @@ namespace AaronOutdoors
                 config.Filters.Add(typeof(GlobalRouting));
             });
             services.AddControllersWithViews();
+
+            // requires
+            // using Microsoft.AspNetCore.Identity.UI.Services;
+            // using WebPWrecover.Services;
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
             services.AddRazorPages();
         }
 

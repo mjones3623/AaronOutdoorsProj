@@ -29,5 +29,6 @@ namespace AaronOutdoors.Models
         public string SiteUserZipCode { get; set; }
         [Display(Name = "Phone Number")]
         public string SiteUserPhone { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -87,6 +87,9 @@ namespace AaronOutdoors.Data
         }
         public DbSet<State> States { get; set; }
         public DbSet<SiteUser> SiteUsers { get; set; }
+        public DbSet<BlogPost> BlogPosts { get; set; }
+        public DbSet<BlogComment> BlogComments { get; set; }
+        public DbSet<BlogView> BlogViews { get; set; }
     }
     
 }

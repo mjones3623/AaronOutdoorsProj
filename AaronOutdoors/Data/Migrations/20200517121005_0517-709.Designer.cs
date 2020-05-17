@@ -4,14 +4,16 @@ using AaronOutdoors.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AaronOutdoors.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200517121005_0517-709")]
+    partial class _0517709
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,6 @@ namespace AaronOutdoors.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Image1")
                         .HasColumnType("nvarchar(max)");
 
@@ -68,9 +67,6 @@ namespace AaronOutdoors.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Text2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BlogPostId");
@@ -110,9 +106,6 @@ namespace AaronOutdoors.Data.Migrations
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SiteUserCity")
                         .HasColumnType("nvarchar(max)");
 
@@ -132,6 +125,9 @@ namespace AaronOutdoors.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SiteUserZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SiteUserId");
@@ -496,15 +492,15 @@ namespace AaronOutdoors.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9605e105-29d0-44be-8cbe-a3eba9fe49cd",
-                            ConcurrencyStamp = "9aa92afe-4a66-4761-af4e-c7b395069b32",
+                            Id = "1cb79ae3-0728-4319-9733-1c8721266f2e",
+                            ConcurrencyStamp = "ea094bb2-a84a-457b-b027-93ec5c9f2a84",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "3e1431c9-5305-4078-9929-711bd69800bf",
-                            ConcurrencyStamp = "b97d0511-400d-436a-987f-ce4df1f3c036",
+                            Id = "3f780e57-6349-407e-afb6-da545b1af61e",
+                            ConcurrencyStamp = "d7692d42-2d40-4a33-87e2-8f55d1f1361e",
                             Name = "SiteUser",
                             NormalizedName = "SiteUser"
                         });

@@ -4,14 +4,16 @@ using AaronOutdoors.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AaronOutdoors.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200516192512_0516-225")]
+    partial class _0516225
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,6 @@ namespace AaronOutdoors.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Image1")
                         .HasColumnType("nvarchar(max)");
 
@@ -70,34 +69,9 @@ namespace AaronOutdoors.Data.Migrations
                     b.Property<string>("Text2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("BlogPostId");
 
                     b.ToTable("BlogPosts");
-                });
-
-            modelBuilder.Entity("AaronOutdoors.Models.BlogView", b =>
-                {
-                    b.Property<int>("BlogViewId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BlogViewCommentBlogCommentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BlogViewPostBlogPostId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BlogViewId");
-
-                    b.HasIndex("BlogViewCommentBlogCommentId");
-
-                    b.HasIndex("BlogViewPostBlogPostId");
-
-                    b.ToTable("BlogViews");
                 });
 
             modelBuilder.Entity("AaronOutdoors.Models.SiteUser", b =>
@@ -109,9 +83,6 @@ namespace AaronOutdoors.Data.Migrations
 
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SiteUserCity")
                         .HasColumnType("nvarchar(max)");
@@ -132,6 +103,9 @@ namespace AaronOutdoors.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SiteUserZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SiteUserId");
@@ -496,15 +470,15 @@ namespace AaronOutdoors.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9605e105-29d0-44be-8cbe-a3eba9fe49cd",
-                            ConcurrencyStamp = "9aa92afe-4a66-4761-af4e-c7b395069b32",
+                            Id = "68ca2558-4e26-40c1-81cf-e7d5cd715f1d",
+                            ConcurrencyStamp = "8585827c-7305-47f6-97f1-f767a44344e0",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "3e1431c9-5305-4078-9929-711bd69800bf",
-                            ConcurrencyStamp = "b97d0511-400d-436a-987f-ce4df1f3c036",
+                            Id = "cdbe1522-29d9-422d-82fd-c2c226c00a2c",
+                            ConcurrencyStamp = "2508fba3-d3aa-4279-bae0-f159519c4299",
                             Name = "SiteUser",
                             NormalizedName = "SiteUser"
                         });
@@ -684,17 +658,6 @@ namespace AaronOutdoors.Data.Migrations
                     b.HasOne("AaronOutdoors.Models.BlogPost", null)
                         .WithMany("BlogCommentList")
                         .HasForeignKey("BlogPostId");
-                });
-
-            modelBuilder.Entity("AaronOutdoors.Models.BlogView", b =>
-                {
-                    b.HasOne("AaronOutdoors.Models.BlogComment", "BlogViewComment")
-                        .WithMany()
-                        .HasForeignKey("BlogViewCommentBlogCommentId");
-
-                    b.HasOne("AaronOutdoors.Models.BlogPost", "BlogViewPost")
-                        .WithMany()
-                        .HasForeignKey("BlogViewPostBlogPostId");
                 });
 
             modelBuilder.Entity("AaronOutdoors.Models.SiteUser", b =>

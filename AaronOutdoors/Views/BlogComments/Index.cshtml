@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AaronOutdoors.Models.BlogComment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BlogCommentSiteUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlogCommentText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlogCommentDateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlogCommentSiteUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlogCommentText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlogCommentDateTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BlogCommentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BlogCommentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BlogCommentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
