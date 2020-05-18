@@ -44,8 +44,11 @@ namespace AaronOutdoors.Controllers
         }
 
         // GET: BlogComments/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
+            var blogPost = _context.BlogPosts.Where(m => m.BlogPostId == id).FirstOrDefault();
+            ViewBag.BlogPost = blogPost;
+
             return View();
         }
 

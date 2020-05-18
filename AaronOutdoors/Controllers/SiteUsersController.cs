@@ -64,6 +64,9 @@ namespace AaronOutdoors.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 siteUser.IdentityUserId = userId;
+
+                siteUser.Image = "~/img/" + siteUser.Image;
+
                 _context.Add(siteUser);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

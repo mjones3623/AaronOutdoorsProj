@@ -54,10 +54,14 @@ namespace AaronOutdoors.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogPostId,Text1,Text2,Image1,Image2,Image3")] BlogPost blogPost)
+        public async Task<IActionResult> Create([Bind("BlogPostId,Author,Title,Description,Text1,Text2,Image1,Image2,Image3")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
+                blogPost.Image1 = "~/img/" + blogPost.Image1;
+                blogPost.Image2 = "~/img/" + blogPost.Image2;
+                blogPost.Image3 = "~/img/" + blogPost.Image3;
+
                 _context.Add(blogPost);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
