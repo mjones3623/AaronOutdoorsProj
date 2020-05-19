@@ -11,6 +11,7 @@ namespace AaronOutdoors.Models
         [ForeignKey("BlogPost")]
         public int BlogCommentId { get; set; }
         public BlogPost BlogPost { get; set; }
+        public int CommentBlogPostId { get; set; }
         
         public int BlogCommentSiteUserId { get; set; }
         public string BlogCommentText { get; set; }

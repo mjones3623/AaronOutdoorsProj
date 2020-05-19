@@ -33,6 +33,9 @@ namespace AaronOutdoors.Migrations
                     b.Property<string>("BlogCommentText")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CommentBlogPostId")
+                        .HasColumnType("int");
+
                     b.HasKey("BlogCommentId");
 
                     b.ToTable("BlogComments");
@@ -63,7 +66,13 @@ namespace AaronOutdoors.Migrations
                     b.Property<string>("Text1")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Text1Heading")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Text2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text2Heading")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -492,15 +501,15 @@ namespace AaronOutdoors.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "66f27418-9dfe-4e95-b377-76bb61980ba0",
-                            ConcurrencyStamp = "53122c72-729b-4231-bca4-4456dcb7ed6b",
+                            Id = "3dd8ff2b-e5ca-40b5-902f-3d5016e541ac",
+                            ConcurrencyStamp = "bd5942e0-0c24-4f85-8065-9191f1a5ae1d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6fb1ec94-3e3a-442d-9746-323e5944e88b",
-                            ConcurrencyStamp = "60bfc185-2f24-4de9-9b94-5cae1143ae2b",
+                            Id = "f29171bb-40e8-4d05-81ea-f4652330838e",
+                            ConcurrencyStamp = "911f8d63-201d-4de2-b226-1fa66db52d4e",
                             Name = "SiteUser",
                             NormalizedName = "SiteUser"
                         });

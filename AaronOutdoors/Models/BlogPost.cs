@@ -12,7 +12,9 @@ namespace AaronOutdoors.Models
         public string Author { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string Text1Heading { get; set; }
         public string Text1 { get; set; }
+        public string Text2Heading { get; set; }
         public string Text2 { get; set; }
         public string Image1 { get; set; }
         public string Image2 { get; set; }

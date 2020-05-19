@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AaronOutdoors.Data;
 using AaronOutdoors.Models;
+using System.Security.Claims;
 
 namespace AaronOutdoors.Controllers
 {
@@ -57,13 +58,22 @@ namespace AaronOutdoors.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogCommentId,BlogCommentSiteUserId,BlogCommentText,BlogCommentDateTime")] BlogComment blogComment)
+        public async Task<IActionResult> Create([Bind("BlogCommentId,CommentBlogPostId,BlogCommentSiteUserId,BlogCommentText,BlogCommentDateTime")] BlogComment blogComment)
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var siteUser = _context.SiteUsers.Where(i => i.IdentityUserId == userId).FirstOrDefault();
+                var commentBlogPost = _context.BlogPosts.Where(b => b.BlogPostId == blogComment.CommentBlogPostId).FirstOrDefault();
+                DateTime dateTimeNow = DateTime.Now;
+                
+                blogComment.BlogCommentDateTime = dateTimeNow;
+                blogComment.BlogCommentSiteUserId = siteUser.SiteUserId;
+                blogComment.CommentBlogPostId = commentBlogPost.BlogPostId;
+
                 _context.Add(blogComment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
             return View(blogComment);
         }

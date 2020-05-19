@@ -5,11 +5,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('../img/bg10.jpg');">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto text-center">
+                <h2 class="title">A Place for Hunting and Fishing Enthusiasts to Share and Discover New Stories</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main main-raised">
+    <div class="container">
+        <div class="section">
+            @foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-raised card-background" style="background-image: url('@Url.Content(item.Image1)');">
+                            <div class="card-body">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+                                <a href="#pablo">
+                                    <h3 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h3>
+                                </a>
+                                <p class="card-description">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </p>
+                                <a class="btn btn-primary btn-round" asp-controller="BlogComments"
+                                   asp-action="Create" asp-route-id="@item.BlogPostId">ViewBlog</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        
+    </div>
+      
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -41,40 +77,41 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image3)
-            </td>
-            <td>
-                <a asp-controller="BlogComments"
-                   asp-action="Create" asp-route-id="@item.BlogPostId">ViewBlog</a>
-                <a asp-action="Edit" asp-route-id="@item.BlogPostId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BlogPostId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BlogPostId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image3)
+                </td>
+                <td>
+                    <a asp-controller="BlogComments"
+                       asp-action="Create" asp-route-id="@item.BlogPostId">ViewBlog</a>
+                    <a asp-action="Edit" asp-route-id="@item.BlogPostId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.BlogPostId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BlogPostId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
