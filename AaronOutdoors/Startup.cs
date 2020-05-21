@@ -52,7 +52,7 @@ namespace AaronOutdoors
             // using WebPWrecover.Services;
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-
+            services.AddHttpContextAccessor();
             services.AddRazorPages();
         }
 

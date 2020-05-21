@@ -8,18 +8,38 @@ using Microsoft.EntityFrameworkCore;
 using AaronOutdoors.Data;
 using AaronOutdoors.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace AaronOutdoors.Controllers
 {
     public class SiteUsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        
 
         public SiteUsersController(ApplicationDbContext context)
         {
             _context = context;
+            
         }
+        // GET: SiteUsers
+        public IActionResult LoginRouter()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var siteUserInDb = _context.SiteUsers.Where(m => m.IdentityUserId == userId).FirstOrDefault();
+            
 
+            if (siteUserInDb == null)
+            {
+                return RedirectToAction("Create", "SiteUsers");
+            }
+            else 
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
+        }
         // GET: SiteUsers
         public async Task<IActionResult> Index()
         {
@@ -58,21 +78,22 @@ namespace AaronOutdoors.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SiteUserId,IdentityUserId,SiteUserFirstName,SiteUserLastName,SiteUserStreetAddress,SiteUserCity,SiteUserState,SiteUserZipCode,SiteUserPhone,image")] SiteUser siteUser)
+        public async Task<IActionResult> Create([Bind("SiteUserId,IdentityUserId,SiteUserFirstName,SiteUserLastName,SiteUserStreetAddress,SiteUserCity,SiteUserState,SiteUserZipCode,SiteUserPhone,Image")] SiteUser siteUser)
         {
             if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
                 siteUser.IdentityUserId = userId;
 
-                siteUser.Image = "~/img/" + siteUser.Image;
+                siteUser.Image = "../img/" + siteUser.Image;
 
                 _context.Add(siteUser);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", siteUser.IdentityUserId);
-            return View(siteUser);
+            return View();
         }
 
         // GET: SiteUsers/Edit/5

@@ -4,6 +4,8 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var blogPost = ViewBag.BlogPost;
+    var commentsThisPost = ViewBag.CommentsThisPost;
+    var siteUser = ViewBag.SiteUser;
 }
 
 
@@ -103,33 +105,57 @@
             </div>
         </div>
         <div class="section section-comments">
+          
             <div class="row">
                 <div class="col-md-8 ml-auto mr-auto">
                     <h4>Enter Comments Below</h4>
                     <hr />
                     <div class="row">
-                        
-                            <form asp-action="Create">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="form-group">
-                                    
-                                    <input asp-for="CommentBlogPostId" class="form-control" type="hidden" value="@blogPost.BlogPostId"/>
-                                    <span asp-validation-for="CommentBlogPostId" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="BlogCommentText" class="control-label"></label>
-                                    <textarea asp-for="BlogCommentText" class="form-control" rows="4"></textarea>
-                                    <span asp-validation-for="BlogCommentText" class="text-danger"></span>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <input type="submit" value="Submit" class="btn btn-primary" />
-                                </div>
-                            </form>
-                        
-                    </div>
 
-                    
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+
+                                <input asp-for="CommentBlogPostId" class="form-control" type="hidden" value="@blogPost.BlogPostId" />
+                                <span asp-validation-for="CommentBlogPostId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="BlogCommentText" class="control-label"></label>
+                                <textarea asp-for="BlogCommentText" class="form-control" rows="4"></textarea>
+                                <span asp-validation-for="BlogCommentText" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Submit" class="btn btn-primary" />
+                            </div>
+                        </form>
+
+                    </div>
+                    @foreach (var item in commentsThisPost)
+                    {
+                <div class="media">
+                    <a class="float-left" href="#pablo">
+                        <div class="avatar">
+                            <img class="media-object" src="@siteUser.Image" alt="...">
+                        </div>
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">@siteUser.SiteUserFirstName, @siteUser.SiteUserLastName <small>&#xB7; @commentsThisPost.BlogCommentDateTime</small></h4>
+                        <h6 class="text-muted"></h6>
+                        <p>@commentsThisPost.BlogCommentText</p>
+                        <div class="media-footer">
+                            <a href="#pablo" class="btn btn-primary btn-link float-right" rel="tooltip" title="Reply to Comment">
+                                <i class="material-icons">reply</i> Reply
+                            </a>
+                            <a href="#pablo" class="btn btn-danger btn-link float-right">
+                                <i class="material-icons">favorite</i> 243
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                    }
+
                 </div>
             </div>
         </div>

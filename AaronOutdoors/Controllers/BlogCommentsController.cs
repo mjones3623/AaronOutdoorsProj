@@ -47,8 +47,14 @@ namespace AaronOutdoors.Controllers
         // GET: BlogComments/Create
         public IActionResult Create(int? id)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var siteUser = _context.SiteUsers.Where(i => i.IdentityUserId == userId).FirstOrDefault();
             var blogPost = _context.BlogPosts.Where(m => m.BlogPostId == id).FirstOrDefault();
+            var commentsThisPost = _context.BlogComments.Where(c => blogPost.BlogPostId == c.CommentBlogPostId).ToList();
             ViewBag.BlogPost = blogPost;
+            ViewBag.CommentsThisPost = commentsThisPost;
+            ViewBag.SiteUser = siteUser;
 
             return View();
         }
